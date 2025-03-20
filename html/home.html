@@ -1,35 +1,237 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Trote Solidário - 2025</title>
-        <link rel="stylesheet" href="css/styles.css"/>
-    </head>
-    <body>
-        <header> <!-- cabeçalho do corpo da página -->
-            Trote Solidário - 2025
-        </header>
-        <nav>
-            <div id="links-menu">
-                <a href="index.html"> Home </a>
-                <a href="introducao.html"> Introdução </a>
-                <a href="objetivo.html"> Objetivo </a>
-                <a href="formato.html"> Formato </a>
-                <a href="gincana.html"> Gincana </a>
-                <a href="integracao.html"> Integração </a>
-                <a href="observacoes.html"> Observações </a>
-                <a href="calculadoras.html"> Calculadoras </a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trote Solidário - 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Importar a fonte Montserrat do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css"/>
+    <style>
+        /* Aplicar a fonte Montserrat */
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Animação de hover nos cards */
+        .content-card {
+            transition: all 0.3s ease;
+        }
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Animação de hover nos links da Navbar */
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #93c5fd; /* Azul claro do Tailwind */
+            transform: translateY(-2px);
+        }
+
+        /* Fixar a sidebar e permitir scroll */
+        #sidebar {
+            height: 100vh; /* Altura total da tela */
+            overflow-y: auto; /* Permitir scroll */
+        }
+
+        /* Personalizar a barra de rolagem */
+        #sidebar::-webkit-scrollbar {
+            width: 8px; /* Largura da barra de rolagem */
+        }
+
+        #sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1; /* Cor de fundo da barra de rolagem */
+        }
+
+        #sidebar::-webkit-scrollbar-thumb {
+            background: #3b82f6; /* Cor da barra de rolagem */
+            border-radius: 4px; /* Bordas arredondadas */
+        }
+
+        #sidebar::-webkit-scrollbar-thumb:hover {
+            background: #2563eb; /* Cor da barra de rolagem ao passar o mouse */
+        }
+
+        /* Estilo do título */
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e3a8a; /* Azul escuro */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Barra de separação entre os links */
+        .link-separator {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Setinha minimalista */
+        .arrow {
+            margin-left: auto; /* Alinha a setinha à direita */
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-link:hover .arrow {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <header class="bg-blue-600 text-white shadow-lg w-full fixed z-10">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <!-- Título com imagem -->
+            <div class="flex items-center">
+                <img src="../images/trote.jpg" alt="Trote Solidário" class="w-12 h-12 rounded-full mr-2">
+                <h1 class="text-2xl font-bold">Trote Solidário - 2025</h1>
             </div>
-            <img src="images/trote.jpg" alt="Trote Solidário"/>
-        </nav>
-        <div class="container">
-            <h2> Trote Solidário - Construa vitórias fora de campo 
-                e jogue pela solidariedade 
-            </h2>
-            <p> CENTRO UNIVERSITÁRIO MUNICIPAL DE FRANCA </p>
-            <p> Uni-FACEF </p>
-            <p> Regulamento Trote Solidário - 2025</p>    
+            <!-- Links da Navbar (visíveis apenas em desktop) -->
+            <div class="hidden md:flex space-x-4">
+                <a href="home.html" class="nav-link">Home</a>
+                <a href="introducao.html" class="nav-link">Introdução</a>
+                <a href="objetivo.html" class="nav-link">Objetivo</a>
+                <a href="formato.html" class="nav-link">Formato</a>
+                <a href="gincana.html" class="nav-link">Gincana</a>
+                <a href="integracao.html" class="nav-link">Integração</a>
+                <a href="observacoes.html" class="nav-link">Observações</a>
+                <a href="calculadoras.html" class="nav-link">Calculadoras</a>
+            </div>
+            <!-- Botão para abrir/fechar o menu (visível apenas em mobile) -->
+            <button id="menu-toggle" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
         </div>
-    </body>
+    </header>
+
+    <!-- Menu lateral (visível apenas em mobile) -->
+    <nav id="sidebar" class="bg-blue-800 text-white w-64 min-h-screen fixed top-0 left-0 transform -translate-x-full md:hidden transition-transform duration-300 z-40">
+        <div class="p-4">
+            <!-- Título com imagem -->
+            <div class="flex items-center mb-4">
+                <img src="../images/trote.jpg" alt="Trote Solidário" class="w-12 h-12 rounded-full mr-2">
+                <h2 class="text-xl font-bold">Trote Solidário</h2>
+            </div>
+            <div id="links-menu" class="space-y-2">
+                <a href="index.html" class="nav-link block p-2 hover:bg-blue-700 rounded flex items-center link-separator">
+                    Home <span class="arrow ml-2">></span>
+                </a>
+                <a href="introducao.html" class="nav-link block p-2 hover:bg-blue-700 rounded flex items-center link-separator">
+                    Introdução <span class="arrow ml-2">></span>
+                </a>
+                <a href="objetivo.html" class="nav-link block p-2 hover:bg-blue-700 rounded flex items-center link-separator">
+                    Objetivo <span class="arrow ml-2">></span>
+                </a>
+                <a href="formato.html" class="nav-link block p-2 hover:bg-blue-700 rounded flex items-center link-separator">
+                    Formato <span class="arrow ml-2">></span>
+                </a>
+                <a href="gincana.html" class="nav-link block p-2 hover:bg-blue-700 rounded flex items-center link-separator">
+                    Gincana <span class="arrow ml-2">></span>
+                </a>
+                <a href="integracao.html" class="nav-link block p-2 hover:bg-blue-700 rounded flex items-center link-separator">
+                    Integração <span class="arrow ml-2">></span>
+                </a>
+                <a href="observacoes.html" class="nav-link block p-2 hover:bg-blue-700 rounded flex items-center link-separator">
+                    Observações <span class="arrow ml-2">></span>
+                </a>
+                <a href="calculadoras.html" class="nav-link block p-2 hover:bg-blue-700 rounded flex items-center">
+                    Calculadoras <span class="arrow ml-2">></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Overlay para fechar o menu (visível apenas em mobile) -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-30"></div>
+
+    <!-- Conteúdo principal -->
+    <div class="container mx-auto p-4 pt-24 md:pt-20 transition-all duration-300">
+        <h2 class="main-title text-center mb-8">
+            Trote Solidário - Construa vitórias fora de campo e jogue pela solidariedade
+        </h2>
+        <p class="text-gray-700 mb-2 text-center">CENTRO UNIVERSITÁRIO MUNICIPAL DE FRANCA</p>
+        <p class="text-gray-700 mb-2 text-center">Uni-FACEF</p>
+        <p class="text-gray-700 mb-8 text-center">Regulamento Trote Solidário - 2025</p>
+
+        <!-- Conteúdo adicional -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Card 1 -->
+            <div class="content-card bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold text-blue-800 mb-4">Sobre o Trote Solidário</h3>
+                <p class="text-gray-700 mb-4">
+                    O Trote Solidário é uma iniciativa do Uni-FACEF que visa promover a integração entre calouros e veteranos através de atividades que beneficiam a comunidade. Em 2025, o tema será "Construa vitórias fora de campo e jogue pela solidariedade".
+                </p>
+                <p class="text-gray-700 mb-4">
+                    O evento contará com diversas atividades, como arrecadação de alimentos, campanhas de doação de sangue e gincanas educativas. O objetivo é transformar o tradicional trote universitário em uma ação positiva e engajadora.
+                </p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="content-card bg-white p-6 rounded-lg shadow-md">
+                <h4 class="text-xl font-bold text-blue-800 mb-2">Atividades Programadas</h4>
+                <ul class="list-disc list-inside text-gray-700 mb-4">
+                    <li>Arrecadação de alimentos não perecíveis</li>
+                    <li>Campanha de doação de sangue</li>
+                    <li>Gincana cultural e esportiva</li>
+                    <li>Visitas a instituições de caridade</li>
+                </ul>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="content-card bg-white p-6 rounded-lg shadow-md">
+                <h4 class="text-xl font-bold text-blue-800 mb-2">Como Participar</h4>
+                <p class="text-gray-700 mb-4">
+                    Para participar, os alunos devem se inscrever nas atividades através do site oficial do Uni-FACEF. A participação é voluntária e todos os envolvidos receberão certificados de horas complementares.
+                </p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="content-card bg-white p-6 rounded-lg shadow-md">
+                <h4 class="text-xl font-bold text-blue-800 mb-2">Benefícios</h4>
+                <p class="text-gray-700 mb-4">
+                    Além de promover a integração, o Trote Solidário contribui para o desenvolvimento pessoal e social dos participantes, além de fortalecer os laços com a comunidade.
+                </p>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="content-card bg-white p-6 rounded-lg shadow-md">
+                <h4 class="text-xl font-bold text-blue-800 mb-2">Histórico</h4>
+                <p class="text-gray-700 mb-4">
+                    Desde sua criação, o Trote Solidário já arrecadou mais de 10 toneladas de alimentos e realizou mais de 500 doações de sangue, impactando positivamente a vida de milhares de pessoas.
+                </p>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="content-card bg-white p-6 rounded-lg shadow-md">
+                <h4 class="text-xl font-bold text-blue-800 mb-2">Depoimentos</h4>
+                <p class="text-gray-700 mb-4">
+                    "Participar do Trote Solidário foi uma experiência incrível. Além de me integrar à universidade, pude ajudar muitas pessoas." - Ana, caloura de 2024.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script para controlar o menu -->
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+        });
+    </script>
+</body>
 </html>
