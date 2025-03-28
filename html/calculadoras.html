@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Pontos - Trote Solidário</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        .navbar-gradient {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        }
+        
+        .sidebar-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+        }
+        
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+        
+        .content-card {
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .activity-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .points-badge {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            50% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
+            100% { transform: scale(1); }
+        }
+        
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e5e7eb;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            transition: width 0.5s ease, background-color 0.5s ease;
+        }
+        
+        .input-focus:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(29, 78, 216, 0.1) 100%);
+            border-left: 4px solid #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar-gradient text-white shadow-lg w-full fixed z-10">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="flex items-center space-x-3">
+                <img src="../images/trote.jpg" alt="Trote Solidário" class="w-12 h-12 rounded-full border-2 border-white">
+                <h1 class="text-2xl font-bold">Trote Solidário <span class="font-normal">2025</span></h1>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="home.html" class="text-white hover:text-blue-100 flex items-center">
+                    <i class="fas fa-home mr-2"></i> Home
+                </a>
+                <a href="introducao.html" class="text-white hover:text-blue-100 flex items-center">
+                    <i class="fas fa-info-circle mr-2"></i> Introdução
+                </a>
+                <a href="objetivo.html" class="text-white hover:text-blue-100 flex items-center">
+                    <i class="fas fa-bullseye mr-2"></i> Objetivo
+                </a>
+                <a href="formato.html" class="text-white hover:text-blue-100 flex items-center">
+                    <i class="fas fa-clipboard-list mr-2"></i> Formato
+                </a>
+                <a href="gincana.html" class="text-white hover:text-blue-100 flex items-center">
+                    <i class="fas fa-trophy mr-2"></i> Gincana
+                </a>
+                <a href="integracao.html" class="text-white hover:text-blue-100 flex items-center">
+                    <i class="fas fa-users mr-2"></i> Integração
+                </a>
+                <a href="observacoes.html" class="text-white hover:text-blue-100 flex items-center">
+                    <i class="fas fa-clipboard-check mr-2"></i> Observações
+                </a>
+                <a href="calculadoras.html" class="text-white font-semibold flex items-center">
+                    <i class="fas fa-calculator mr-2"></i> Calculadoras
+                </a>
+            </div>
+            <button id="menu-toggle" class="md:hidden focus:outline-none text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Menu lateral -->
+    <nav id="sidebar" class="sidebar-gradient text-white w-64 min-h-screen fixed top-0 left-0 transform -translate-x-full md:hidden transition-transform duration-300 z-40">
+        <div class="p-4">
+            <div class="flex items-center mb-8 pt-4">
+                <img src="../images/trote.jpg" alt="Trote Solidário" class="w-12 h-12 rounded-full border-2 border-white mr-3">
+                <h2 class="text-xl font-bold">Trote Solidário <span class="font-normal">2025</span></h2>
+            </div>
+            <div id="links-menu" class="space-y-1">
+                <a href="home.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-home mr-3 w-5 text-center"></i> Home
+                </a>
+                <a href="introducao.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-info-circle mr-3 w-5 text-center"></i> Introdução
+                </a>
+                <a href="objetivo.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-bullseye mr-3 w-5 text-center"></i> Objetivo
+                </a>
+                <a href="formato.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-clipboard-list mr-3 w-5 text-center"></i> Formato
+                </a>
+                <a href="gincana.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-trophy mr-3 w-5 text-center"></i> Gincana
+                </a>
+                <a href="integracao.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-users mr-3 w-5 text-center"></i> Integração
+                </a>
+                <a href="observacoes.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-clipboard-check mr-3 w-5 text-center"></i> Observações
+                </a>
+                <a href="calculadoras.html" class="block p-4 bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-calculator mr-3 w-5 text-center"></i> Calculadoras
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Overlay -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-30"></div>
+
+    <!-- Conteúdo principal -->
+    <div class="container mx-auto px-4 pt-32 pb-12">
+        <div class="max-w-5xl mx-auto">
+            <!-- Cabeçalho com animação -->
+            <div class="text-center mb-12 overflow-hidden">
+                <h1 class="main-title mb-6 animate-fade-in-up">
+                    Calculadora de <span class="block">Pontos do Trote</span>
+                </h1>
+                <div class="w-24 h-1 bg-blue-500 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Calcule os pontos do seu time em todas as atividades do Trote Solidário 2025
+                </p>
+            </div>
+
+            <!-- Calculadora -->
+            <div class="content-card bg-white rounded-xl shadow-md p-8 mb-12 highlight-box">
+                <div class="flex flex-col md:flex-row items-start mb-8">
+                    <div class="md:w-1/3 mb-6 md:mb-0 md:pr-8">
+                        <div class="bg-blue-100 p-4 rounded-lg h-full flex items-center justify-center floating">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                                 alt="Time calculando pontos" 
+                                 class="rounded-lg shadow-md">
+                        </div>
+                    </div>
+                    <div class="md:w-2/3">
+                        <h2 class="text-3xl font-bold text-blue-800 mb-4 flex items-center">
+                            <i class="fas fa-calculator mr-3 text-blue-500"></i>
+                            Como usar a calculadora
+                        </h2>
+                        <p class="text-gray-700 mb-4">
+                            Preencha os campos abaixo com os pontos obtidos em cada categoria. A medida que você digita, a barra de progresso irá mostrar visualmente o desempenho do seu time.
+                        </p>
+                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                            <p class="text-blue-700 flex items-center">
+                                <i class="fas fa-lightbulb text-blue-500 mr-2"></i>
+                                Dica: Consulte o regulamento para ver os pontos máximos de cada atividade.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulário da calculadora -->
+                <form id="calculadora-form" class="space-y-8">
+                    <!-- Seção Esportes -->
+                    <div class="border-b border-gray-200 pb-8">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-blue-100 text-blue-600 p-3 rounded-full mr-4">
+                                <i class="fas fa-trophy text-xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-blue-800">🏆 Esportes</h2>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div>
+                                <label for="mascote" class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-mask mr-2 text-blue-500"></i> Mascote do Time
+                                </label>
+                                <input type="number" id="mascote" min="0" max="500" 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm input-focus">
+                                <div class="text-xs text-gray-500 mt-1">Máximo: 500 pontos</div>
+                                <div class="progress-bar">
+                                    <div id="progress-mascote" class="progress-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="homenagem" class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-medal mr-2 text-blue-500"></i> Homenagem a Atletas
+                                </label>
+                                <input type="number" id="homenagem" min="0" max="2000" 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm input-focus">
+                                <div class="text-xs text-gray-500 mt-1">Máximo: 2.000 pontos</div>
+                                <div class="progress-bar">
+                                    <div id="progress-homenagem" class="progress-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="caracterizacao" class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-tshirt mr-2 text-blue-500"></i> Caracterização
+                                </label>
+                                <input type="number" id="caracterizacao" min="0" max="1000" 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm input-focus">
+                                <div class="text-xs text-gray-500 mt-1">Máximo: 1.000 pontos</div>
+                                <div class="progress-bar">
+                                    <div id="progress-caracterizacao" class="progress-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Seção Solidariedade -->
+                    <div class="border-b border-gray-200 pb-8">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-blue-100 text-blue-600 p-3 rounded-full mr-4">
+                                <i class="fas fa-hands-helping text-xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-blue-800">❤️ Solidariedade</h2>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div>
+                                <label for="arrecadacao" class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-shopping-basket mr-2 text-blue-500"></i> Arrecadação
+                                </label>
+                                <input type="number" id="arrecadacao" min="0" max="5000" 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm input-focus">
+                                <div class="text-xs text-gray-500 mt-1">Máximo: 5.000 pontos</div>
+                                <div class="progress-bar">
+                                    <div id="progress-arrecadacao" class="progress-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="doacao-sangue" class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-tint mr-2 text-blue-500"></i> Doação de Sangue
+                                </label>
+                                <input type="number" id="doacao-sangue" min="0" max="2500" 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm input-focus">
+                                <div class="text-xs text-gray-500 mt-1">Máximo: 2.500 pontos</div>
+                                <div class="progress-bar">
+                                    <div id="progress-doacao-sangue" class="progress-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="acao-social" class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-heart mr-2 text-blue-500"></i> Ação Social
+                                </label>
+                                <input type="number" id="acao-social" min="0" max="1500" 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm input-focus">
+                                <div class="text-xs text-gray-500 mt-1">Máximo: 1.500 pontos</div>
+                                <div class="progress-bar">
+                                    <div id="progress-acao-social" class="progress-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Seção Audiovisual -->
+                    <div class="pb-8">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-blue-100 text-blue-600 p-3 rounded-full mr-4">
+                                <i class="fas fa-camera-retro text-xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-blue-800">🎥 Registro Audiovisual</h2>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div>
+                                <label for="registro-arrecadacao" class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-photo-video mr-2 text-blue-500"></i> Registro Arrecadação
+                                </label>
+                                <input type="number" id="registro-arrecadacao" min="0" max="1000" 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm input-focus">
+                                <div class="text-xs text-gray-500 mt-1">Máximo: 1.000 pontos</div>
+                                <div class="progress-bar">
+                                    <div id="progress-registro-arrecadacao" class="progress-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="registro-acao-social" class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-video mr-2 text-blue-500"></i> Registro Ação Social
+                                </label>
+                                <input type="number" id="registro-acao-social" min="0" max="500" 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm input-focus">
+                                <div class="text-xs text-gray-500 mt-1">Máximo: 500 pontos</div>
+                                <div class="progress-bar">
+                                    <div id="progress-registro-acao-social" class="progress-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Botões -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button type="button" onclick="calcularPontos()" 
+                                class="px-8 py-4 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transition duration-300 flex items-center">
+                            <i class="fas fa-calculator mr-2"></i> Calcular Pontos
+                        </button>
+                        <button type="button" onclick="resetarCalculadora()" 
+                                class="px-8 py-4 bg-gray-200 text-gray-800 font-bold rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-4 focus:ring-gray-300 transition duration-300 flex items-center">
+                            <i class="fas fa-eraser mr-2"></i> Limpar Campos
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Resultados (inicialmente oculto) -->
+            <div id="resultados" class="content-card hidden bg-white rounded-xl shadow-md p-8 highlight-box">
+                <h2 class="text-3xl font-bold text-blue-800 mb-8 text-center flex items-center justify-center">
+                    <i class="fas fa-chart-pie mr-3 text-blue-500"></i> Resultados
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="activity-card p-6 text-center">
+                        <div class="bg-blue-100 text-blue-600 p-3 rounded-full inline-block mb-3">
+                            <i class="fas fa-trophy text-xl"></i>
+                        </div>
+                        <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider">Esportes</h3>
+                        <p class="text-4xl font-bold text-blue-600 mt-2"><span id="total-esportes">0</span> <span class="text-lg">pts</span></p>
+                    </div>
+                    <div class="activity-card p-6 text-center">
+                        <div class="bg-blue-100 text-blue-600 p-3 rounded-full inline-block mb-3">
+                            <i class="fas fa-hands-helping text-xl"></i>
+                        </div>
+                        <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider">Solidariedade</h3>
+                        <p class="text-4xl font-bold text-blue-600 mt-2"><span id="total-solidariedade">0</span> <span class="text-lg">pts</span></p>
+                    </div>
+                    <div class="activity-card p-6 text-center">
+                        <div class="bg-blue-100 text-blue-600 p-3 rounded-full inline-block mb-3">
+                            <i class="fas fa-camera-retro text-xl"></i>
+                        </div>
+                        <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider">Audiovisual</h3>
+                        <p class="text-4xl font-bold text-blue-600 mt-2"><span id="total-audiovisual">0</span> <span class="text-lg">pts</span></p>
+                    </div>
+                </div>
+                
+                <div class="activity-card p-8 text-center bg-gradient-to-r from-blue-50 to-blue-100">
+                    <h3 class="text-lg font-medium text-gray-700 uppercase tracking-wider mb-2">Total Geral</h3>
+                    <p class="text-5xl font-bold text-blue-700"><span id="total-geral">0</span> <span class="text-xl">pontos</span></p>
+                    <div class="mt-6">
+                        <div class="progress-bar mx-auto max-w-2xl">
+                            <div id="progress-total" class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <p class="text-gray-600 mt-2" id="progress-text">0% do total possível</p>
+                    </div>
+                </div>
+                
+                <div class="mt-8 text-center">
+                    <p class="text-gray-600 text-lg">
+                        <i class="fas fa-quote-left text-blue-400 mr-1"></i>
+                        Construa vitórias fora de campo e jogue pela solidariedade
+                        <i class="fas fa-quote-right text-blue-400 ml-1"></i>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="bg-blue-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <img src="../images/trote.jpg" alt="Trote Solidário" class="w-16 h-16 rounded-full border-2 border-white mb-2">
+                    <h3 class="text-xl font-bold">Trote Solidário 2025</h3>
+                    <p class="text-blue-200">Uni-FACEF - Centro Universitário Municipal de Franca</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-white hover:text-blue-300 text-2xl">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-blue-300 text-2xl">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-blue-300 text-2xl">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-blue-300 text-2xl">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-blue-700 mt-6 pt-6 text-center text-blue-200">
+                <p>© 2025 Trote Solidário Uni-FACEF. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Menu mobile
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        });
+
+        // Animação de scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.content-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+
+        // Atualizar barras de progresso conforme digita
+        document.querySelectorAll('input[type="number"]').forEach(input => {
+            input.addEventListener('input', function() {
+                const max = parseInt(this.max) || 100;
+                const value = parseInt(this.value) || 0;
+                const percentage = Math.min((value / max) * 100, 100);
+                const progressId = 'progress-' + this.id;
+                const progressElement = document.getElementById(progressId);
+                
+                if (progressElement) {
+                    progressElement.style.width = percentage + '%';
+                    
+                    // Mudar cor conforme preenchimento
+                    if (percentage < 30) {
+                        progressElement.className = 'progress-fill bg-red-500';
+                    } else if (percentage < 70) {
+                        progressElement.className = 'progress-fill bg-yellow-500';
+                    } else {
+                        progressElement.className = 'progress-fill bg-green-500';
+                    }
+                }
+            });
+        });
+
+        // Função para calcular os pontos totais
+        function calcularPontos() {
+            // Obter valores dos inputs
+            const mascote = parseInt(document.getElementById('mascote').value) || 0;
+            const homenagem = parseInt(document.getElementById('homenagem').value) || 0;
+            const caracterizacao = parseInt(document.getElementById('caracterizacao').value) || 0;
+            const arrecadacao = parseInt(document.getElementById('arrecadacao').value) || 0;
+            const doacaoSangue = parseInt(document.getElementById('doacao-sangue').value) || 0;
+            const acaoSocial = parseInt(document.getElementById('acao-social').value) || 0;
+            const registroArrecadacao = parseInt(document.getElementById('registro-arrecadacao').value) || 0;
+            const registroAcaoSocial = parseInt(document.getElementById('registro-acao-social').value) || 0;
+
+            // Calcular totais por categoria
+            const totalEsportes = mascote + homenagem + caracterizacao;
+            const totalSolidariedade = arrecadacao + doacaoSangue + acaoSocial;
+            const totalAudiovisual = registroArrecadacao + registroAcaoSocial;
+
+            // Calcular total geral
+            const totalGeral = totalEsportes + totalSolidariedade + totalAudiovisual;
+            
+            // Calcular porcentagem do total possível (máximo 12.500 pontos)
+            const porcentagemTotal = Math.min((totalGeral / 12500) * 100, 100);
+
+            // Atualizar os totais na tela
+            document.getElementById('total-esportes').textContent = totalEsportes;
+            document.getElementById('total-solidariedade').textContent = totalSolidariedade;
+            document.getElementById('total-audiovisual').textContent = totalAudiovisual;
+            document.getElementById('total-geral').textContent = totalGeral;
+            
+            // Atualizar barra de progresso geral
+            const progressTotal = document.getElementById('progress-total');
+            progressTotal.style.width = porcentagemTotal + '%';
+            
+            // Mudar cor conforme desempenho
+            if (porcentagemTotal < 30) {
+                progressTotal.className = 'progress-fill bg-red-500';
+            } else if (porcentagemTotal < 70) {
+                progressTotal.className = 'progress-fill bg-yellow-500';
+            } else {
+                progressTotal.className = 'progress-fill bg-green-500';
+            }
+            
+            // Atualizar texto de porcentagem
+            document.getElementById('progress-text').textContent = 
+                Math.round(porcentagemTotal) + '% do total possível';
+
+            // Mostrar a seção de resultados
+            document.getElementById('resultados').classList.remove('hidden');
+            
+            // Rolar suavemente até os resultados
+            document.getElementById('resultados').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Função para resetar o formulário
+        function resetarCalculadora() {
+            document.getElementById('calculadora-form').reset();
+            document.getElementById('resultados').classList.add('hidden');
+            
+            // Resetar todas as barras de progresso
+            document.querySelectorAll('.progress-fill').forEach(progress => {
+                progress.style.width = '0%';
+                progress.className = 'progress-fill';
+            });
+        }
+    </script>
+</body>
+</html>
