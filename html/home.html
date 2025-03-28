@@ -15,53 +15,15 @@
             font-family: 'Montserrat', sans-serif;
             background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
         }
-
-        /* Animação de hover nos cards */
-        .content-card {
-            transition: all 0.3s ease;
-            border-left: 4px solid transparent;
-        }
-        .content-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            border-left-color: #3b82f6;
-        }
-
-        /* Navbar gradient */
+        
         .navbar-gradient {
             background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
         }
-
-        /* Sidebar gradient */
+        
         .sidebar-gradient {
             background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
         }
-
-        /* Fixar a sidebar e permitir scroll */
-        #sidebar {
-            height: 100vh;
-            overflow-y: auto;
-        }
-
-        /* Personalizar a barra de rolagem */
-        #sidebar::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        #sidebar::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        #sidebar::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 4px;
-        }
-
-        #sidebar::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.5);
-        }
-
-        /* Estilo do título */
+        
         .main-title {
             font-size: 2.5rem;
             font-weight: 700;
@@ -69,76 +31,90 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
             line-height: 1.2;
         }
-
-        /* Barra de separação entre os links */
-        .link-separator {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        
+        .content-card {
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(20px);
         }
-
-        /* Setinha minimalista */
-        .arrow {
-            margin-left: auto;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
-        }
-
-        .nav-link:hover .arrow {
+        
+        .fade-in {
             opacity: 1;
+            transform: translateY(0);
         }
-
-        /* Efeito de hover nos links da navbar */
-        .nav-link-desktop {
-            position: relative;
-            padding: 0.5rem 1rem;
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(29, 78, 216, 0.1) 100%);
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .mission-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
-
-        .nav-link-desktop:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: #93c5fd;
-            transition: width 0.3s ease;
-        }
-
-        .nav-link-desktop:hover:after {
-            width: 100%;
-        }
-
-        /* Efeito de hover nos cards */
-        .hover-effect {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .hover-effect:hover {
+        
+        .mission-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
-
+        
+        .course-badge {
+            background-color: #3b82f6;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .number-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #3b82f6;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
         /* Destaque para o título da universidade */
         .university-title {
             color: #1e3a8a;
             font-weight: 600;
             letter-spacing: 0.5px;
         }
-
+        
         /* Espaçamento melhorado */
         .content-spacing {
             margin-top: 6rem;
         }
-
+        
         /* Botão com gradiente */
         .gradient-btn {
             background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
             transition: all 0.3s ease;
         }
-
+        
         .gradient-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
@@ -147,7 +123,7 @@
 </head>
 <body>
     <!-- Navbar -->
-    <header class="navbar-gradient text-white shadow-lg w-full  z-10">
+    <header class="navbar-gradient text-white shadow-lg w-full fixed z-10">
         <div class="container mx-auto flex justify-between items-center p-4">
             <!-- Título com imagem -->
             <div class="flex items-center space-x-3">
@@ -156,28 +132,28 @@
             </div>
             <!-- Links da Navbar (visíveis apenas em desktop) -->
             <div class="hidden md:flex space-x-6">
-                <a href="home.html" class="nav-link-desktop text-white hover:text-blue-100 flex items-center">
+                <a href="home.html" class="text-white hover:text-blue-100 flex items-center">
                     <i class="fas fa-home mr-2"></i> Home
                 </a>
-                <a href="introducao.html" class="nav-link-desktop text-white hover:text-blue-100 flex items-center">
+                <a href="introducao.html" class="text-white hover:text-blue-100 flex items-center">
                     <i class="fas fa-info-circle mr-2"></i> Introdução
                 </a>
-                <a href="objetivo.html" class="nav-link-desktop text-white hover:text-blue-100 flex items-center">
+                <a href="objetivo.html" class="text-white hover:text-blue-100 flex items-center">
                     <i class="fas fa-bullseye mr-2"></i> Objetivo
                 </a>
-                <a href="formato.html" class="nav-link-desktop text-white hover:text-blue-100 flex items-center">
+                <a href="formato.html" class="text-white hover:text-blue-100 flex items-center">
                     <i class="fas fa-clipboard-list mr-2"></i> Formato
                 </a>
-                <a href="gincana.html" class="nav-link-desktop text-white hover:text-blue-100 flex items-center">
+                <a href="gincana.html" class="text-white hover:text-blue-100 flex items-center">
                     <i class="fas fa-trophy mr-2"></i> Gincana
                 </a>
-                <a href="integracao.html" class="nav-link-desktop text-white hover:text-blue-100 flex items-center">
+                <a href="integracao.html" class="text-white hover:text-blue-100 flex items-center">
                     <i class="fas fa-users mr-2"></i> Integração
                 </a>
-                <a href="observacoes.html" class="nav-link-desktop text-white hover:text-blue-100 flex items-center">
+                <a href="observacoes.html" class="text-white hover:text-blue-100 flex items-center">
                     <i class="fas fa-clipboard-check mr-2"></i> Observações
                 </a>
-                <a href="calculadoras.html" class="nav-link-desktop text-white hover:text-blue-100 flex items-center">
+                <a href="calculadoras.html" class="text-white hover:text-blue-100 flex items-center">
                     <i class="fas fa-calculator mr-2"></i> Calculadoras
                 </a>
             </div>
@@ -199,29 +175,29 @@
                 <h2 class="text-xl font-bold">Trote Solidário <span class="font-normal">2025</span></h2>
             </div>
             <div id="links-menu" class="space-y-1">
-                <a href="index.html" class="nav-link block p-4 hover:bg-blue-700 rounded-lg flex items-center link-separator transition-colors">
-                    <i class="fas fa-home mr-3 w-5 text-center"></i> Home <span class="arrow ml-2">></span>
+                <a href="home.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-home mr-3 w-5 text-center"></i> Home
                 </a>
-                <a href="introducao.html" class="nav-link block p-4 hover:bg-blue-700 rounded-lg flex items-center link-separator transition-colors">
-                    <i class="fas fa-info-circle mr-3 w-5 text-center"></i> Introdução <span class="arrow ml-2">></span>
+                <a href="introducao.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-info-circle mr-3 w-5 text-center"></i> Introdução
                 </a>
-                <a href="objetivo.html" class="nav-link block p-4 hover:bg-blue-700 rounded-lg flex items-center link-separator transition-colors">
-                    <i class="fas fa-bullseye mr-3 w-5 text-center"></i> Objetivo <span class="arrow ml-2">></span>
+                <a href="objetivo.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-bullseye mr-3 w-5 text-center"></i> Objetivo
                 </a>
-                <a href="formato.html" class="nav-link block p-4 hover:bg-blue-700 rounded-lg flex items-center link-separator transition-colors">
-                    <i class="fas fa-clipboard-list mr-3 w-5 text-center"></i> Formato <span class="arrow ml-2">></span>
+                <a href="formato.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-clipboard-list mr-3 w-5 text-center"></i> Formato
                 </a>
-                <a href="gincana.html" class="nav-link block p-4 hover:bg-blue-700 rounded-lg flex items-center link-separator transition-colors">
-                    <i class="fas fa-trophy mr-3 w-5 text-center"></i> Gincana <span class="arrow ml-2">></span>
+                <a href="gincana.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-trophy mr-3 w-5 text-center"></i> Gincana
                 </a>
-                <a href="integracao.html" class="nav-link block p-4 hover:bg-blue-700 rounded-lg flex items-center link-separator transition-colors">
-                    <i class="fas fa-users mr-3 w-5 text-center"></i> Integração <span class="arrow ml-2">></span>
+                <a href="integracao.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-users mr-3 w-5 text-center"></i> Integração
                 </a>
-                <a href="observacoes.html" class="nav-link block p-4 hover:bg-blue-700 rounded-lg flex items-center link-separator transition-colors">
-                    <i class="fas fa-clipboard-check mr-3 w-5 text-center"></i> Observações <span class="arrow ml-2">></span>
+                <a href="observacoes.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-clipboard-check mr-3 w-5 text-center"></i> Observações
                 </a>
-                <a href="calculadoras.html" class="nav-link block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
-                    <i class="fas fa-calculator mr-3 w-5 text-center"></i> Calculadoras <span class="arrow ml-2">></span>
+                <a href="calculadoras.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-calculator mr-3 w-5 text-center"></i> Calculadoras
                 </a>
             </div>
         </div>
@@ -231,7 +207,7 @@
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-30"></div>
 
     <!-- Conteúdo principal -->
-    <div class="container mx-auto px-4 pt-2 pb-12 transition-all duration-300 content-spacing">
+    <div class="container mx-auto px-4 pt-32 pb-12">
         <div class="max-w-4xl mx-auto text-center mb-12">
             <h2 class="main-title mb-6">
                 Trote Solidário - Construa vitórias fora de campo e jogue pela solidariedade
@@ -246,7 +222,7 @@
         <!-- Conteúdo adicional -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Card 1 -->
-            <div class="content-card bg-white p-6 rounded-xl shadow-md hover-effect">
+            <div class="content-card bg-white p-6 rounded-xl shadow-md mission-card">
                 <div class="text-blue-600 mb-4">
                     <i class="fas fa-hands-helping text-3xl"></i>
                 </div>
@@ -260,7 +236,7 @@
             </div>
 
             <!-- Card 2 -->
-            <div class="content-card bg-white p-6 rounded-xl shadow-md hover-effect">
+            <div class="content-card bg-white p-6 rounded-xl shadow-md mission-card">
                 <div class="text-blue-600 mb-4">
                     <i class="fas fa-calendar-check text-3xl"></i>
                 </div>
@@ -290,7 +266,7 @@
             </div>
 
             <!-- Card 3 -->
-            <div class="content-card bg-white p-6 rounded-xl shadow-md hover-effect">
+            <div class="content-card bg-white p-6 rounded-xl shadow-md mission-card">
                 <div class="text-blue-600 mb-4">
                     <i class="fas fa-user-plus text-3xl"></i>
                 </div>
@@ -304,7 +280,7 @@
             </div>
 
             <!-- Card 4 -->
-            <div class="content-card bg-white p-6 rounded-xl shadow-md hover-effect">
+            <div class="content-card bg-white p-6 rounded-xl shadow-md mission-card">
                 <div class="text-blue-600 mb-4">
                     <i class="fas fa-star text-3xl"></i>
                 </div>
@@ -324,7 +300,7 @@
             </div>
 
             <!-- Card 5 -->
-            <div class="content-card bg-white p-6 rounded-xl shadow-md hover-effect">
+            <div class="content-card bg-white p-6 rounded-xl shadow-md mission-card">
                 <div class="text-blue-600 mb-4">
                     <i class="fas fa-chart-line text-3xl"></i>
                 </div>
@@ -345,7 +321,7 @@
             </div>
 
             <!-- Card 6 -->
-            <div class="content-card bg-white p-6 rounded-xl shadow-md hover-effect">
+            <div class="content-card bg-white p-6 rounded-xl shadow-md mission-card">
                 <div class="text-blue-600 mb-4">
                     <i class="fas fa-comment-dots text-3xl"></i>
                 </div>
@@ -410,6 +386,24 @@
             sidebar.classList.add('-translate-x-full');
             overlay.classList.add('hidden');
             document.body.classList.remove('overflow-hidden');
+        });
+
+        // Animação de scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.content-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            cards.forEach(card => {
+                observer.observe(card);
+            });
         });
     </script>
 </body>

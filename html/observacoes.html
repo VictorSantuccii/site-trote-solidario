@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observações - Trote Solidário Uni-FACEF</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        .navbar-gradient {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        }
+        
+        .sidebar-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+        }
+        
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+        
+        .content-card {
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(29, 78, 216, 0.1) 100%);
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .observation-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .observation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .number-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+        
+        .contact-card {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar-gradient text-white shadow-lg w-full fixed z-10">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="flex items-center space-x-3">
+                <img src="../images/trote.jpg" alt="Trote Solidário" class="w-12 h-12 rounded-full border-2 border-white">
+                <h1 class="text-2xl font-bold">Trote Solidário <span class="font-normal">2025</span></h1>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="home.html" class="text-white hover:text-blue-100 flex items-center">
+                    <i class="fas fa-home mr-2"></i> Home
+                </a>
+                <a href="introducao.html" class="text-white hover:text-blue-100 flex items-center">
+                    <i class="fas fa-info-circle mr-2"></i> Introdução
+                </a>
+                <a href="objetivo.html" class="text-white hover:text-blue-100 flex items-center">
+                    <i class="fas fa-bullseye mr-2"></i> Objetivo
+                </a>
+                <a href="formato.html" class="text-white hover:text-blue-100 flex items-center">
+                    <i class="fas fa-clipboard-list mr-2"></i> Formato
+                </a>
+                <a href="gincana.html" class="text-white hover:text-blue-100 flex items-center">
+                    <i class="fas fa-trophy mr-2"></i> Gincana
+                </a>
+                <a href="integracao.html" class="text-white hover:text-blue-100 flex items-center">
+                    <i class="fas fa-users mr-2"></i> Integração
+                </a>
+                <a href="observacoes.html" class="text-white font-semibold flex items-center">
+                    <i class="fas fa-clipboard-check mr-2"></i> Observações
+                </a>
+                <a href="calculadoras.html" class="text-white hover:text-blue-100 flex items-center">
+                    <i class="fas fa-calculator mr-2"></i> Calculadoras
+                </a>
+            </div>
+            <button id="menu-toggle" class="md:hidden focus:outline-none text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Menu lateral -->
+    <nav id="sidebar" class="sidebar-gradient text-white w-64 min-h-screen fixed top-0 left-0 transform -translate-x-full md:hidden transition-transform duration-300 z-40">
+        <div class="p-4">
+            <div class="flex items-center mb-8 pt-4">
+                <img src="../images/trote.jpg" alt="Trote Solidário" class="w-12 h-12 rounded-full border-2 border-white mr-3">
+                <h2 class="text-xl font-bold">Trote Solidário <span class="font-normal">2025</span></h2>
+            </div>
+            <div id="links-menu" class="space-y-1">
+                <a href="home.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-home mr-3 w-5 text-center"></i> Home
+                </a>
+                <a href="introducao.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-info-circle mr-3 w-5 text-center"></i> Introdução
+                </a>
+                <a href="objetivo.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-bullseye mr-3 w-5 text-center"></i> Objetivo
+                </a>
+                <a href="formato.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-clipboard-list mr-3 w-5 text-center"></i> Formato
+                </a>
+                <a href="gincana.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-trophy mr-3 w-5 text-center"></i> Gincana
+                </a>
+                <a href="integracao.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-users mr-3 w-5 text-center"></i> Integração
+                </a>
+                <a href="observacoes.html" class="block p-4 bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-clipboard-check mr-3 w-5 text-center"></i> Observações
+                </a>
+                <a href="calculadoras.html" class="block p-4 hover:bg-blue-700 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-calculator mr-3 w-5 text-center"></i> Calculadoras
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Overlay -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-30"></div>
+
+    <!-- Conteúdo principal -->
+    <div class="container mx-auto px-4 pt-32 pb-12">
+        <div class="max-w-5xl mx-auto">
+            <!-- Cabeçalho com animação -->
+            <div class="text-center mb-12 overflow-hidden">
+                <h1 class="main-title mb-6 animate-fade-in-up">
+                    Observações <span class="block">Finais</span>
+                </h1>
+                <div class="w-24 h-1 bg-blue-500 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Regras e diretrizes importantes para o Trote Solidário Uni-FACEF 2025
+                </p>
+            </div>
+
+            <!-- Seção de observações -->
+            <div class="content-card bg-white rounded-xl shadow-md p-8 mb-12 highlight-box">
+                <h2 class="text-3xl font-bold text-blue-800 mb-6 text-center">
+                    <i class="fas fa-exclamation-circle mr-2"></i>
+                    Regulamento do Trote Solidário
+                </h2>
+                
+                <div class="space-y-6">
+                    <!-- Observação 1 -->
+                    <div class="observation-card p-6 flex items-start">
+                        <div class="number-badge pulse">1</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-700 mb-2">Presença Obrigatória</h3>
+                            <p class="text-gray-700">
+                                Na noite de encerramento, é obrigatória a presença dos estudantes, vinculada à emissão de certificado de participação na gincana TROTE SOLIDÁRIO Uni-FACEF 2025.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Observação 2 -->
+                    <div class="observation-card p-6 flex items-start">
+                        <div class="number-badge pulse">2</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-700 mb-2">Doações em Dinheiro</h3>
+                            <p class="text-gray-700">
+                                É proibido pedir donativos em dinheiro em nome específico do Hospital do Câncer ou de alguma entidade filantrópica. Deve-se informar que a doação é destinada ao TROTE SOLIDÁRIO Uni-FACEF 2025. Em caso de necessidade de ofício, procurar a Coordenação em cada uma das Unidades.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Observação 3 -->
+                    <div class="observation-card p-6 flex items-start">
+                        <div class="number-badge pulse">3</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-700 mb-2">Restrições de Som</h3>
+                            <p class="text-gray-700">
+                                É vedado o uso de Apitos, Buzinas e demais apetrechos que emitam sons excessivos durante a execução das provas da noite de encerramento, além de efeitos pirotécnicos em qualquer momento, sob pena de perda de pontos.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Observação 4 -->
+                    <div class="observation-card p-6 flex items-start">
+                        <div class="number-badge pulse">4</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-700 mb-2">Distribuição de Arrecadações</h3>
+                            <p class="text-gray-700">
+                                Os Resultados das arrecadações da 1ª Etapa serão distribuídos entre as Entidades que enviarem ofício ao Uni-FACEF, priorizando a ordem de chegada, com exceção dos suplementos que serão direcionados aos Voluntários da Saúde.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Observação 5 -->
+                    <div class="observation-card p-6 flex items-start">
+                        <div class="number-badge pulse">5</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-700 mb-2">Doações de Sangue</h3>
+                            <p class="text-gray-700">
+                                Na prova de Doações de Sangue, o objetivo é fomentar novas doações a partir do Trote Solidário, nesta perspectiva, serão penalizadas ações de abordagem a doadores que já estejam no hemocentro (ou chegando) para doação.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Observação 6 -->
+                    <div class="observation-card p-6 flex items-start">
+                        <div class="number-badge pulse">6</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-700 mb-2">Casos Omissos</h3>
+                            <p class="text-gray-700">
+                                Os casos omissos ao presente Regulamento serão avaliados pela Comissão Organizadora.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contatos -->
+            <div class="content-card bg-white rounded-xl shadow-md p-8">
+                <h2 class="text-3xl font-bold text-blue-800 mb-8 text-center">
+                    <i class="fas fa-address-book mr-2"></i>
+                    Coordenação 2025
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Contato geral -->
+                    <div class="contact-card p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-envelope text-2xl mr-3 text-white"></i>
+                            <h3 class="text-xl font-bold text-white">Contato Geral</h3>
+                        </div>
+                        <p class="text-blue-100 mb-2">
+                            <i class="fas fa-at mr-2"></i> trotesolidario@facef.br
+                        </p>
+                    </div>
+                    
+                    <!-- Reitor -->
+                    <div class="contact-card p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-user-tie text-2xl mr-3 text-white"></i>
+                            <h3 class="text-xl font-bold text-white">Reitoria</h3>
+                        </div>
+                        <p class="text-blue-100 mb-1">
+                            <strong>Prof. Dr. José Alfredo de Pádua Guerra</strong>
+                        </p>
+                        <p class="text-blue-100">
+                            <i class="fas fa-at mr-2"></i> reitoria@facef.br
+                        </p>
+                    </div>
+                    
+                    <!-- Pró-Reitora -->
+                    <div class="contact-card p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-user-graduate text-2xl mr-3 text-white"></i>
+                            <h3 class="text-xl font-bold text-white">Pró-Reitora de Extensão</h3>
+                        </div>
+                        <p class="text-blue-100 mb-1">
+                            <strong>Profa. Dra. Melissa Franchini C. Bandos</strong>
+                        </p>
+                        <p class="text-blue-100">
+                            <i class="fas fa-at mr-2"></i> melissa@facef.br
+                        </p>
+                    </div>
+                    
+                    <!-- Coordenadora -->
+                    <div class="contact-card p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-user-shield text-2xl mr-3 text-white"></i>
+                            <h3 class="text-xl font-bold text-white">Coordenadora de Extensão</h3>
+                        </div>
+                        <p class="text-blue-100 mb-1">
+                            <strong>Profa. Ma. Flávia Haddad França</strong>
+                        </p>
+                        <p class="text-blue-100">
+                            <i class="fas fa-at mr-2"></i> flaviahaddad@facef.br
+                        </p>
+                    </div>
+                    
+                    <!-- Outros contatos -->
+                    <div class="col-span-full">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-blue-800 mb-2">
+                                    <i class="fas fa-user-tie mr-2"></i> Pró-Reitor de Administração
+                                </h4>
+                                <p class="text-gray-700">
+                                    <strong>Prof. Dr. Alfredo José Machado Neto</strong><br>
+                                    <i class="fas fa-at mr-2 text-blue-500"></i> josealfredo@facef.br
+                                </p>
+                            </div>
+                            
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-blue-800 mb-2">
+                                    <i class="fas fa-bullhorn mr-2"></i> Coordenadora de Marketing
+                                </h4>
+                                <p class="text-gray-700">
+                                    <strong>Profa. Ma. Alba Penteado</strong><br>
+                                    <i class="fas fa-at mr-2 text-blue-500"></i> alba@facef.br
+                                </p>
+                            </div>
+                            
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-blue-800 mb-2">
+                                    <i class="fas fa-calendar-alt mr-2"></i> Setor de Eventos
+                                </h4>
+                                <p class="text-gray-700">
+                                    <strong>Me. Lucas Antônio Santos</strong><br>
+                                    <i class="fas fa-at mr-2 text-blue-500"></i> lucas@facef.br
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 bg-blue-100 p-6 rounded-lg border border-blue-200 text-center">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">
+                        <i class="fas fa-question-circle mr-2"></i>
+                        Dúvidas ou informações adicionais?
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        Entre em contato com nossa equipe de coordenação através dos e-mails acima ou pessoalmente na sede do Uni-FACEF.
+                    </p>
+                    <button class="gradient-btn text-white font-medium py-2 px-6 rounded-full inline-flex items-center pulse">
+                        <i class="fas fa-envelope mr-2"></i> Enviar Mensagem
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="bg-blue-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <img src="../images/trote.jpg" alt="Trote Solidário" class="w-16 h-16 rounded-full border-2 border-white mb-2">
+                    <h3 class="text-xl font-bold">Trote Solidário 2025</h3>
+                    <p class="text-blue-200">Uni-FACEF - Centro Universitário Municipal de Franca</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-white hover:text-blue-300 text-2xl">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-blue-300 text-2xl">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-blue-300 text-2xl">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-blue-300 text-2xl">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-blue-700 mt-6 pt-6 text-center text-blue-200">
+                <p>© 2025 Trote Solidário Uni-FACEF. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Menu mobile
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        });
+
+        // Animação de scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.content-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
